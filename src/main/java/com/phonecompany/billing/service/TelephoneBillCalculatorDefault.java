@@ -48,18 +48,18 @@ public class TelephoneBillCalculatorDefault implements TelephoneBillCalculator {
         LocalDateTime dateTimeBegin = LocalDateTime.parse(callBegin, formatter);
         LocalDateTime dateTimeEnd = LocalDateTime.parse(callEnd, formatter);
 
-        System.out.println("volane cislo " + callNumber);
-        System.out.println("zahajeni hovoru " + dateTimeBegin);
-        System.out.println("konec hovoru " + dateTimeEnd);
+        System.out.println("volane cislo: " + callNumber);
+        System.out.println("zahajeni hovoru: " + dateTimeBegin);
+        System.out.println("konec hovoru: " + dateTimeEnd);
 
         Duration duration = Duration.between(dateTimeBegin, dateTimeEnd);
-        System.out.println("vteriny " + duration.getSeconds());
+        System.out.println("vteriny: " + duration.getSeconds());
 
         LocalTime intervalStart = LocalTime.of(8, 0);
         LocalTime intervalEnd = LocalTime.of(16, 0);
 
         int minutes = (int) (duration.getSeconds() / 60);
-        System.out.println("minuty " + minutes);
+        System.out.println("minuty: " + minutes);
 
 
         double price = 0D;
@@ -68,19 +68,18 @@ public class TelephoneBillCalculatorDefault implements TelephoneBillCalculator {
             if (dateTimeBegin.plusMinutes(i).toLocalTime().isAfter(intervalStart) &&
                     dateTimeBegin.plusMinutes(i).toLocalTime().isBefore(intervalEnd)) {
                 price = price + 1;
-                System.out.println("+ 1 - " + price);
-
+                System.out.println("+1: " + price);
             } else {
                 price = price + 0.5;
-                System.out.println("+ 0.5 - " + price);
+                System.out.println("+0.5: " + price);
             }
         }
         for (int i = 4; i <= minutes; i++) {
             price = price + 0.2;
-            System.out.println("+ 0.2 - " + price);
+            System.out.println("+0.2: " + price);
         }
-        System.out.println("celkem " + price);
-        System.out.println("");
+        System.out.println("celkem: " + price);
+        System.out.println();
 
         return new BigDecimal(price);
     }
